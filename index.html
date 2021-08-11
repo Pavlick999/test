@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Info User Id</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<style>
+body {
+	margin: 0;
+	background-color: #1e1e3e;
+}
+.box {
+	display: flex;
+	align-items: center;
+	height: 100vh;
+}
+.input-group, .kvizID {
+	max-width: 500px;
+	margin: 20px auto;
+}
+.kvizID {
+	font-size: 18px;
+    text-align: center;
+}
+.btn-secondary {
+	background-color: #d34085;
+	color: #ffffff !important;
+	transition: 0.5s;
+}
+.btn-secondary:hover {
+	background-color: #c02c72;
+}
+#basic-addon3 {
+	border: 0;
+}
+</style>
+
+</head>
+<body>
+
+
+<section class="box">
+	<div class="container">
+		<div class="input-group input-group-lg">
+			<span class="input-group-addon" id="basic-addon3">Домен</span>
+			<input type="text" class="form-control domein" placeholder="website.com">
+			<span class="input-group-btn">
+				<button class="btn btn-secondary" onclick="kvizID();" type="button">Узнать ID квиза</button>
+			</span>
+		</div>
+		<div class="kvizID"></div>
+	</div>
+</section>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"> </script>
+<script >
+function kvizID() {
+	let domein = $(".domein").val();
+	console.log(domein);
+	$.ajax({
+     url: "https://api.marquiz.ru/v1/Quizzes/findByDomain?domain=" + domein,
+     dataType: 'json', 
+     success: function(json){		 
+		$(".kvizID").html("<div class=\"alert alert-info\" role=\"alert\">" + json.id + "</div>");
+	}
+});
+}
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
